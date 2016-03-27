@@ -1,4 +1,4 @@
-module Abcdefghppp where
+module Main where
 
 import Data.List (permutations)
 
@@ -23,3 +23,6 @@ isValid (a,b,c,d,e,f,g,h,p) =
 
 answers :: [Tuple]
 answers = filter isValid . map toTuple . permutations $ numbers
+
+main :: IO ()
+main = putStrLn . show $ answers
