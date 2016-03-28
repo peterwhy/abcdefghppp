@@ -1,11 +1,14 @@
-module MyDigits (digits) where
+module MyDigits (digits, unDigits, digitsRev) where
 
-digitsRev :: Int -> [Int]
-digitsRev n
+digitsRev :: Integral n => n -> n -> [n]
+digitsRev base n
     | n < 0     = error "must be non-negative"
     | n == 0    = [0]
-    | n < 10    = [n `mod` 10]
-    | otherwise = (n `mod` 10) : digitsRev (n `div` 10)
+    | n < base  = [n `mod` base]
+    | otherwise = (n `mod` base) : digitsRev base (n `div` base)
 
-digits :: Int -> [Int]
-digits = reverse . digitsRev
+digits :: Integral n => n -> n -> [n]
+digits base = reverse . digitsRev base
+
+unDigits :: Integral n => n -> [n] -> n
+unDigits base = foldl (\a b -> base * a + b) 0 
